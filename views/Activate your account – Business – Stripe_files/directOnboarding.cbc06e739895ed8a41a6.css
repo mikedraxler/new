@@ -1,0 +1,212 @@
+.db-ExpressButton {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: background-color var(--animationDuration),
+    box-shadow var(--animationDuration);
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  grid-auto-columns: auto;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0 8px;
+  display: grid;
+  color: var(--neutral900) !important;
+  padding: 7px 10px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 15px !important;
+}
+.db-ExpressButton--colorCritical {
+  background-color: var(--critical400) !important;
+  color: #fff !important;
+}
+.db-ExpressButton--colorCritical svg {
+  color: var(--neutral100) !important;
+}
+.db-ExpressButton--colorCritical:not([disabled]):hover {
+  background-color: var(--critical500) !important;
+}
+.db-ExpressButton--colorCritical[disabled] {
+  background-color: var(--critical200) !important;
+  color: #fff !important;
+}
+.db-ExpressButton--colorWhite,
+.db-ExpressButton--colorWhite:not([disabled]):hover {
+  background-color: #fff !important;
+}
+.db-ExpressButton--colorWhite[disabled] {
+  color: var(--neutral400) !important;
+}
+.db-ExpressButton--colorDefault {
+  background-color: var(--neutral100) !important;
+}
+.db-ExpressButton--colorDefault:not([disabled]):hover {
+  background-color: var(--neutral150) !important;
+}
+.db-ExpressButton--colorDefault[disabled] {
+  color: var(--neutral400) !important;
+}
+.db-ExpressButton--colorPrimary {
+  background-color: var(--brand500) !important;
+  color: #fff !important;
+}
+.db-ExpressButton--colorPrimary[disabled] {
+  color: var(--brand100) !important;
+  background-color: var(--brand200) !important;
+}
+.db-ExpressButton--colorPrimary:not([disabled]):hover {
+  background-color: var(--brand600) !important;
+}
+.db-ExpressButton--widthAuto {
+  width: auto;
+}
+.db-ExpressButton--widthMaximized {
+  width: 100%;
+}
+.db-ExpressButton--ghost,
+.db-ExpressButton--ghost:hover {
+  background-color: #0000 !important;
+}
+.db-ExpressButton--ghost:hover .db-ExpressButton-icon,
+.db-ExpressButton--ghost:hover .db-ExpressButton-label {
+  opacity: 0.7;
+}
+.db-ExpressButton--sizeLarge {
+  min-height: 48px;
+  padding: 12px 20px !important;
+  line-height: 17px !important;
+}
+.db-ExpressButton--rounded {
+  border-radius: 9999px;
+}
+.db-ExpressButton[disabled] {
+  pointer-events: none;
+}
+.db-ExpressButton:not([disabled]):hover {
+  cursor: pointer;
+}
+.db-ExpressButton:not([disabled]):focus {
+  box-shadow: var(--focusShadow);
+}
+.db-ExpressButton-label {
+  transition: opacity var(--animationDuration);
+  position: relative;
+}
+.db-ExpressButton-label--hidden {
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  position: absolute !important;
+}
+.db-ExpressButton-icon {
+  transition: opacity var(--animationDuration);
+}
+
+
+.borderlisten:hover{
+    background-color: rgb(
+      255,
+      255,
+      255
+    );
+    box-shadow: rgba(
+          0,
+          0,
+          0,
+          0
+        )
+        0px 0px 0px 0px,
+      rgba(
+          1,
+          150,
+          237,
+          0.36
+        )
+        0px 0px 0px 4px,
+      rgba(0, 0, 0, 0) 0px
+        0px 0px 0px,
+      rgba(
+          64,
+          68,
+          82,
+          0.16
+        )
+        0px 0px 0px 1px,
+      rgba(0, 0, 0, 0) 0px
+        0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px
+        0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px
+        0px 0px 0px;
+ 
+  }
+
+
+  .borderlisten{
+    background-color: rgb(
+        255,
+        255,
+        255
+      );
+      box-shadow: rgba(
+            0,
+            0,
+            0,
+            0
+          )
+          0px 0px 0px
+          0px,
+        rgba(
+            0,
+            0,
+            0,
+            0
+          )
+          0px 0px 0px
+          0px,
+        rgba(
+            0,
+            0,
+            0,
+            0
+          )
+          0px 0px 0px
+          0px,
+        rgba(
+            64,
+            68,
+            82,
+            0.16
+          )
+          0px 0px 0px
+          1px,
+        rgba(
+            0,
+            0,
+            0,
+            0
+          )
+          0px 0px 0px
+          0px,
+        rgba(
+            0,
+            0,
+            0,
+            0
+          )
+          0px 0px 0px
+          0px,
+        rgba(
+            0,
+            0,
+            0,
+            0
+          )
+          0px 0px 0px
+          0px;
+  }
+//# sourceMappingURL=https://sourcemaps.corp.stripe.com/manage-statics-srv/directOnboarding.cbc06e739895ed8a41a6.css.map

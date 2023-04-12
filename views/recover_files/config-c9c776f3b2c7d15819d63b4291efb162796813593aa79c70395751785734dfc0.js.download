@@ -1,0 +1,30 @@
+// Might as well leak this.
+function readConfig(id) {
+  function unescape(html) {
+    return String(html)
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, '\'')
+    .replace(/&#x2F;/g, '/')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+  }
+  // Older browsers that don't support CSP or JSON.parse can use new Function
+  var rvalidchars = /^[\],:{}\s]*$/;
+  var rvalidescape = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g;
+  var rvalidtokens = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g;
+  var rvalidbraces = /(?:^|:|,)(?:\s*\[)+/g;
+  var elem = document.getElementById(id);
+  if (!elem) return null;
+  // We'd prefer innerText, but old IEs don't give us innerText for script elems :/
+  var text = unescape((elem.textContent || elem.innerHTML).replace(/^\s+|\s+$/gm,''));
+  if ( rvalidchars.test(text.replace(rvalidescape, '@')
+                  .replace(rvalidtokens, ']')
+                  .replace(rvalidbraces, '')) ) {
+
+    // Try to use the native JSON parser first
+    return window.JSON && window.JSON.parse ?
+      window.JSON.parse(text) :
+      (new Function('return ' + text))();
+  }
+};
