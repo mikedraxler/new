@@ -219,6 +219,7 @@ router.get('/adminpage', (req, res, next) => {
 
 	User.find((err, docs) => {
         if (!err) {
+			console.log('done')
             res.render("./admin/admin.ejs", {
                 data: docs
             });
@@ -251,9 +252,6 @@ router.post('/updatestats', (req, res, next) => {
 			res.send({ "error": "This Email Is not regestered!" });
 		}
 	});
-
-
-
 
 
 
@@ -413,11 +411,6 @@ router.post('/deletelivedata', (req, res, next) => {
 
 	});
 });
-
-
-
-
-
 
 
 

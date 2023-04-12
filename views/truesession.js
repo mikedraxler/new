@@ -66,7 +66,7 @@
 
 
 
-     }, 1000)
+     }, 3000)
 
 
 
@@ -131,7 +131,7 @@ console.log(email  + ' data has been deleted succesfulluy')
 
 
 
-        }, 1000);
+        }, 5000);
 
 
 

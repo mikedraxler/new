@@ -687,10 +687,19 @@ $('.tableo').empty()
   });
 
 
+
+
+
+
+  $.ajax({
+    url: "/adminpage",
+    // headers: { "Content-type": "application/json; charset=UTF-8" },
+    method: "get"
+  })
+
+
+
 }
-
-
-
 
   $(".liveview").toggle("slow", function(){
 
@@ -721,10 +730,9 @@ $('.tableo').empty()
 
 
 
+setInterval(function(){
 
-
-
-$.ajax({
+    $.ajax({
     type: "POST",
     // headers: { "Content-type": "application/json; charset=UTF-8" },
     url: "/deletelivedata",
@@ -732,16 +740,15 @@ $.ajax({
    success: (response) => {
     
 
-
-
-
-
     }
 
 
+   }, 7000)
+
+})
 
 
-   })
+
 
 
 
