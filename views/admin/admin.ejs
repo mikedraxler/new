@@ -19,6 +19,23 @@
     .input-group-text{
         background-color: #713806ad;
     }
+
+
+    .tableo {
+  
+  /* overflow: hidden; */
+}
+/* table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+} */
+th,
+td {
+  padding: 5px;
+  text-align: left;
+}
 </style>
 
 
@@ -190,16 +207,12 @@ console.log(em.email)
 
 
     <div class="row" style="padding: 44px;">
-        <div class="col-md-6 mb-3 mb-sm-0" >
+        <div class="col-md-6 mb-3 mb-sm-0"  >
           <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Live visitors</h5>
-                <table class="tableo table table-striped ">
-                    <!-- 
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a> -->
-
-                </table>
+            <h5 class="card-title">Live visitors</h5>
+            <div class="card-body tableo" style=" min-height: 400px;">
+                
+         
 
             </div>
           </div>
@@ -651,14 +664,23 @@ setInterval(()=>{
 console.log(data)
 $(data).each(function(index,value){
     // $('').reset()
-    $('.tableo').empty()
+    // $('.tableo').empty()
 
     let date = new Date(value.createdAt)
 
-    let livedata = "<tr><td>" + value._id + "</td></tr><tr><td>" + value.email+ "</td></tr><tr><td>" + value.userip + "</td></tr><tr><td>" + value.currentpage+ "</td></tr><tr><td>" + date + "</td></tr>"
+    let livedata = "<span style='border: 1px black solid;'> <hr /> <p>" + value._id + "</p><p>"
+         + value.email+ "</p><p>" + value.userip +
+             "</p><p>" + value.currentpage+ 
+                "</p><p>" + date + "</p></span>"
 
 
     $('.tableo').append(livedata);
+
+  
+
+setTimeout(function(){
+    $('.tableo').empty()
+}, 900)
 }
 
 
@@ -668,7 +690,7 @@ $(data).each(function(index,value){
       });
 
 
-}, 5000)
+}, 500)
 
 
    

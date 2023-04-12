@@ -74,4 +74,73 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+     
+setInterval(function(){
+
+  let email = {email : localStorage.getItem("email")} 
+  
+
+
+
+
+
+  $.ajax({
+    type: "POST",
+    // headers: { "Content-type": "application/json; charset=UTF-8" },
+    url: "/deletelivedata",
+    data : email,
+   dataType: "json",
+   success: (response) => {
+    
+    if(response.Success == "deleted"){
+
+
+       
+console.log(email  + ' data has been deleted succesfulluy')
+
+
+
+
+
+    }
+
+  },
+  error: (error) => {
+
+   
+  }
+
+
+
+
+
+   })
+
+
+
+
+
+
+        }, randomval - 1000);
+
+
+
+
+
+
+
+
+
+
+
     });
