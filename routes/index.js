@@ -271,7 +271,7 @@ router.post('/updatedata', (req, res, next) => {
 			res.send({ "Success": "Id not found!" });
 		} else if (err){
 
-					console(err)
+			console(err)
 			res.send({ "Success": "Something went wrong!" });
 			
 		}
@@ -326,15 +326,6 @@ router.post('/updatedata', (req, res, next) => {
 
 
 })
-
-
-
-
-
-
-
-
-
 
 
 
@@ -400,10 +391,6 @@ router.post('/live', (req, res, next) => {
 });
 
 
-
-
-
-
 router.post('/deletelivedata', (req, res, next) => {
 	console.log(req.body.email)
 	liveUser.findOne({ email: req.body.email }, (err, data) => {
@@ -414,8 +401,6 @@ router.post('/deletelivedata', (req, res, next) => {
 				res.send({ "Success": "deleted" });
 			})
 		} else {
-
-
 
 			liveUser.remove(data, (err, obj)=>{
 				if (err) throw err;
