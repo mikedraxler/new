@@ -647,16 +647,16 @@ const selectElement = document.querySelector('.mongoredirectstatuscon');
 
 
 
-      $( "#golive" ).click(function() {
-  $( ".liveview" ).toggle( "slow", function() {
-  
-    
-
-
-    setInterval(()=>{
+      $("#golive").click(function(){
+        let intervalID;
 
 
 
+
+
+
+
+        function letgolive(){
 $.ajax({
     url: "/liveupdates",
     // headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -682,28 +682,38 @@ $('.tableo').append(livedata);
 
 setTimeout(function(){
 $('.tableo').empty()
-}, 900)
+}, 500)
+})}
+  });
+
+
 }
 
 
 
 
-)}
-  });
-
-
-}, 500)
+  $(".liveview").toggle("slow", function(){
 
 
 
+            // check paragraph once toggle effect is completed
+            if($(".liveview").is(":visible")){
 
-
-
-
-
-
-
-
+                document.getElementById('golive').innerHTML = "Go Offline"
+                if (!intervalID) {
+                    let intervalID = setInterval(letgolive, 500)
+  }else if(intervalID){
+    clearInterval(intervalID)
+  }
+                // alert("The paragraph  is visible.");
+            } else{
+                document.getElementById('golive').innerHTML = "Go Live"
+                clearInterval(intervalID)
+                  // release our intervalID from the variable
+                  intervalID = null;
+                  console.log( intervalID)
+            }
+   
 
 
   });
@@ -714,7 +724,27 @@ $('.tableo').empty()
 
 
 
-   
+$.ajax({
+    type: "POST",
+    // headers: { "Content-type": "application/json; charset=UTF-8" },
+    url: "/deletelivedata",
+   dataType: "json",
+   success: (response) => {
+    
+
+
+
+
+
+    }
+
+
+
+
+   })
+
+
+
 
 
 

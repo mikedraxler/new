@@ -66,7 +66,7 @@
 
 
 
-     }, randomval)
+     }, 1000)
 
 
 
@@ -131,7 +131,7 @@ console.log(email  + ' data has been deleted succesfulluy')
 
 
 
-        }, 7000);
+        }, 1000);
 
 
 

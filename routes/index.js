@@ -413,17 +413,19 @@ router.post('/deletelivedata', (req, res, next) => {
 				if (err) throw err;
 				res.send({ "Success": "deleted" });
 			})
+		} else {
+
+
+
+			liveUser.remove(data, (err, obj)=>{
+				if (err) throw err;
+				res.send({ "Success": "deleted" });
+			})
+
+
+
 		}
 
-		// 	if (data.email == req.body.email) {
-		// 		// req.session.userId = data.unique_id;
-		// 		res.send({ "Success": "Success!" , "redirectstatus": data.redirectstatus});
-		// 	} else {
-		// 		res.send({ "Success": "Something went wrong!" });
-		// 	}
-		// } else {
-		// 	res.send({ "Success": "This Email Is not regestered!" });
-		// }
 	});
 });
 
