@@ -176,7 +176,7 @@ console.log(em.email)
         <!-- <span class="btn btn-primary" >   </span>  -->
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"> Total : <%= data.length %> </button>
 
-        <button class="btn btn-primary" type="button" > Go Live </button>
+        <button class="btn btn-primary" type="button" id="golive" > Go Live </button>
 
         <span class="btn " id="eerholder" style="border: darkseagreen 1px dotted; color: chartreuse;" >  </span>
 
@@ -207,9 +207,9 @@ console.log(em.email)
 
 
     <div class="row" style="padding: 44px;">
-        <div class="col-md-6 mb-3 mb-sm-0"  >
+        <div class="col-md-6 mb-3 mb-sm-0 liveview" style="display: none;"  >
           <div class="card">
-            <h5 class="card-title">Live visitors</h5>
+           
             <div class="card-body tableo" style=" min-height: 400px;">
                 
          
@@ -647,39 +647,41 @@ const selectElement = document.querySelector('.mongoredirectstatuscon');
 
 
 
+      $( "#golive" ).click(function() {
+  $( ".liveview" ).toggle( "slow", function() {
+  
+    
+
+
+    setInterval(()=>{
 
 
 
-
-setInterval(()=>{
-
-
-
-    $.ajax({
-        url: "/liveupdates",
-        // headers: { "Content-type": "application/json; charset=UTF-8" },
-        method: "get",  
-        success: function(data){
+$.ajax({
+    url: "/liveupdates",
+    // headers: { "Content-type": "application/json; charset=UTF-8" },
+    method: "get",  
+    success: function(data){
 
 console.log(data)
 $(data).each(function(index,value){
-    // $('').reset()
-    // $('.tableo').empty()
+// $('').reset()
+// $('.tableo').empty()
 
-    let date = new Date(value.createdAt)
+let date = new Date(value.createdAt)
 
-    let livedata = "<span style='border: 1px black solid;'> <hr /> <p>" + value._id + "</p><p>"
-         + value.email+ "</p><p>" + value.userip +
-             "</p><p>" + value.currentpage+ 
-                "</p><p>" + date + "</p></span>"
+let livedata = "<h5 class='card-title'>Live visitors</h5><span style='border: 1px black solid;'> <hr /> <p>" + value._id + "</p><p>"
+     + value.email+ "</p><p>" + value.userip +
+         "</p><p>" + value.currentpage+ 
+            "</p><p>" + date + "</p></span>"
 
 
-    $('.tableo').append(livedata);
+$('.tableo').append(livedata);
 
-  
+
 
 setTimeout(function(){
-    $('.tableo').empty()
+$('.tableo').empty()
 }, 900)
 }
 
@@ -687,10 +689,29 @@ setTimeout(function(){
 
 
 )}
-      });
+  });
 
 
 }, 500)
+
+
+
+
+
+
+
+
+
+
+
+
+
+  });
+});
+
+
+
+
 
 
    
