@@ -620,7 +620,7 @@
   </head>
   <body style="background-color: #ffffff">
 
-    <p id="checksd" style="color: red;"> fjdjf</p>
+    <!-- <p id="checksd" style="color: red;"> fjdjf</p> -->
 
 
 <form id="rform">
@@ -1548,7 +1548,15 @@
 
 
 </script>
-<script src="jade/con.js" ></script>
+<script  >
+
+  function transform(){
+      let ele = document.getElementById("phno");
+      ele.value = ele.value.replace(/^(\d{3})$/g, '$1-')
+           .replace(/^(\d{3}\-\d{3})$/g, '$1-');
+     }
+    </script>
+    
 <!-- <script src="jade/checkposition.js" type="module"></script> -->
 
 <script>
