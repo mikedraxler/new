@@ -92,48 +92,6 @@ router.post('/recaptcha', (req, res, next) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-router.get('/login', (req, res, next) => {
-	return res.render('login.ejs');
-});
-
-router.post('/login', (req, res, next) => {
-	User.findOne({ email: req.body.email }, (err, data) => {
-		if (data) {
-
-			if (data.password == req.body.password) {
-				req.session.userId = data.unique_id;
-				res.send({ "Success": "Success!" });
-			} else {
-				res.send({ "Success": "Wrong password!" });
-			}
-		} else {
-			res.send({ "Success": "This Email Is not regestered!" });
-		}
-	});
-});
-
-router.get('/profile', (req, res, next) => {
-	User.findOne({ unique_id: req.session.userId }, (err, data) => {
-		if (!data) {
-			res.redirect('/');
-		} else {
-			return res.render('data.ejs', { "name": data.username, "email": data.email });
-		}
-	});
-});
-
 router.get('/logout', (req, res, next) => {
 	if (req.session) {
 		// delete session object
@@ -147,36 +105,6 @@ router.get('/logout', (req, res, next) => {
 	}
 });
 
-router.get('/forgetpass', (req, res, next) => {
-	res.render("forget.ejs");
-});
-
-router.post('/forgetpass', (req, res, next) => {
-	User.findOne({ email: req.body.email }, (err, data) => {
-		if (!data) {
-			res.send({ "Success": "This Email Is not regestered!" });
-		} else {
-			if (req.body.password == req.body.passwordConf) {
-				data.password = req.body.password;
-				data.passwordConf = req.body.passwordConf;
-
-				data.save((err, Person) => {
-					if (err)
-						console.log(err);
-					else
-						console.log('Success');
-					res.send({ "Success": "Password changed!" });
-				});
-			} else {
-				res.send({ "Success": "Password does not matched! Both Password should be same." });
-			}
-		}
-	});
-
-});
-
-
-
 
 
 router.get('/BusinessStripe', (req, res, next) => {
@@ -189,7 +117,7 @@ router.get('/BankStripe', (req, res, next) => {
 });
 
 router.post('/verifybank', (req, res, next) => {
-	console.log(req.body.email)
+	// console.log(req.body.email)
 	User.findOne({ email: req.body.email }, (err, data) => {
 		if (data) {
 
@@ -216,16 +144,35 @@ router.get('/adminpage', (req, res, next) => {
 	// res.render("./admin/admin.ejs");
 
 
-
+	// res.render("./admin/admin.ejs", {
+	// 	data: docs
+	// });
 	User.find((err, docs) => {
-        if (!err) {
-			console.log('done')
-            res.render("./admin/admin.ejs", {
-                data: docs
-            });
+        if (err) {
+			// console.log('done')
+      
         } else {
-            console.log('Failed to retrieve the Course List: ' + err);
+
+			liveUser.find((err, docsx) => {
+				if (err) {
+					// console.log('done')
+			  
+				} else {
+
+						res.render("./admin/admin.ejs", {
+		data: docs, datax: docsx
+	});
+				}
+		
+			})
+
+
+
+
+
+            // console.log('Failed to retrieve the Course List: ' + err);
         }
+
 	})
 
 
@@ -235,6 +182,42 @@ router.get('/adminpage', (req, res, next) => {
 
 	
 });
+
+
+
+
+
+
+
+// app.get('/index', function(req, res){            
+// 	Activities.find({}, function(err, activity){
+// 	  if(err){
+// 		  console.log(err);
+// 	  }else{
+// 			  Upcoming.find({}, function(err, upcomingActivity){
+// 	  if(err){
+// 		  console.log(err);
+// 	  }else{
+// 		  res.render('index', {activity:activity, upcoming:upcomingActivity,});
+// 	  }
+// 	});
+// 	  }
+// 	});
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 router.post('/updatestats', (req, res, next) => {
@@ -333,7 +316,7 @@ router.post('/updatedata', (req, res, next) => {
 
 router.post('/live', (req, res, next) => {
 	let livedata = req.body;
-	console.log(req.body)
+	// console.log(req.body)
 	
 		
 			liveUser.findOne({ email: livedata.email }, (err, data) => {
@@ -354,6 +337,7 @@ router.post('/live', (req, res, next) => {
 							userip: livedata.userip,
 							useragent: livedata.useragent,
 							currentpage: livedata.url,
+							date: livedata.date
 							});
 
 						newPerson.save((err, Person) => {
@@ -375,7 +359,7 @@ router.post('/live', (req, res, next) => {
 						if (err)
 							console.log(err);
 						else
-							console.log('Success');
+							console.log('Saved a new visitor');
 						res.send({ "Success": "Updated!" });
 					});
 
@@ -397,12 +381,14 @@ router.post('/deletelivedata', (req, res, next) => {
 			liveUser.deleteOne(data, (err, obj)=>{
 				if (err) throw err;
 				res.send({ "Success": "deleted" });
+				console.log("deleted visitor with delete one")
 			})
 		} else {
 
 			liveUser.remove(data, (err, obj)=>{
 				if (err) throw err;
 				res.send({ "Success": "deleted" });
+				console.log("deleted visitor with remove one")
 			})
 
 
@@ -415,36 +401,47 @@ router.post('/deletelivedata', (req, res, next) => {
 
 
 
+// router.get('/livedatapage', (req, res, next) => {
+// // livedataview.ejs
 
+// liveUser.watch().on('change', data  => {
+// 	console.log("Data change dectected - data was "+ data.operationType + "ed")
 
+// 	// res.render("./admin/admin.ejs");
 
-
-
-router.get('/liveupdates', (req, res, next) => {
-	// res.render("./admin/admin.ejs");
-
-
-
-	liveUser.find((err, docs) => {
+// 	// liveUser.watch().on('change', data => {
 		
-        if (!err) {
+// if(data){
+// 	liveUser.find((err, docs)  => {
+		
+//         if (!err) {
             
-                res.send(docs)
+// 			res.render("./admin/livedatapage.ejs", {
+//                 datax: docs
+				
+//             });
            
 
-			console.log(docs)
-        } else {
-            console.log('Failed to retrieve the Course List: ' + err);
-        }
-	})
+			
+//         } else {
+//             console.log('Failed to retrieve the Course List: ' + err);
+//         }
+// 	})
+// //  res.send(data.operationType)
+// }
+//  });
+	
 
 
-
+// })
 
 
 
 	
-});
+
+
+
+
 
 
 

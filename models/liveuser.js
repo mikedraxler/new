@@ -8,6 +8,7 @@ liveuserSchema = new Schema( {
 	userip: String,
 	useragent: String,
     currentpage: String,
+	date: String,
 	createdAt: {
 		type: Date,
 		default: Date.now

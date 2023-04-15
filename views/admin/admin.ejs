@@ -21,10 +21,7 @@
     }
 
 
-    .tableo {
-  
-  /* overflow: hidden; */
-}
+
 /* table,
 th,
 td {
@@ -160,7 +157,7 @@ console.log(em.email)
 
 </head>
 
-<body class="container" style="background-color: #713806ad;">
+<body class="container" style="background-color: #713806ad;" id="reloading-div">
 
 <div class="container-fluid" >
 
@@ -207,11 +204,42 @@ console.log(em.email)
 
 
     <div class="row" style="padding: 44px;">
-        <div class="col-md-6 mb-3 mb-sm-0 liveview" style="display: none;"  >
-          <div class="card">
+        <div class="col-md-6 mb-3 mb-sm-0 liveview" id="liveviewholder"   >
+          <div class="card" >
            
-            <div class="card-body tableo" style=" min-height: 400px;">
+            <div class="card-body tableo" id="tableo" style=" min-height: 400px;">
+              <h5> Live Visitors</h5>
+
+              
+              <% if(datax.length){
+      
+                for(var i = 0; i< datax.length; i++) {%>  
+               
+                  <br />
+                  <div style="border: 1px solid #FF851B;" id="liveview"  > 
+               
+                    <span > <%= datax[i].email %> </span>
+                    <br />
+                    <span > <%= datax[i].userip %> </span>
+                    <br />
+                    <span > <%= datax[i].currentpage %> </span>
+                    <br />
+                    <span > <%= datax[i].date %> </span>
+                    <br />
+                    <span > <%= datax[i].useragent %> </span>
+                    <br />
+                  </div> 
+
                 
+                   
+                 
+                
+              
+                <% }
+                         
+                 }else{ %>
+             
+                  <% } %> 
          
 
             </div>
@@ -504,7 +532,7 @@ Time
 
     
   </table>
-  <button class="btn btn-primary" style="float: right; width: 300px;" onclick="getuser(event)" type="submit" id="submitbtn" >
+  <button class="btn btn-primary" style="float: right; width: 250px;" onclick="getuser(event)" type="submit" id="submitbtn" >
     Get Info
     </button>
 
@@ -531,7 +559,31 @@ Time
 
 </div>
 
-<script>
+<script >
+  
+
+
+// setTimeout(() => {
+//   document.getElementById('liveviewholder').style.opacity = '0'
+// }, 1000);
+  
+
+
+
+
+ 
+
+
+var light;
+
+function disco(){
+ 
+
+console.log('getting live data')
+
+
+
+
 const searchel = document.querySelector('.datalistOpt');
       searchel.addEventListener('change', (event) => {
 
@@ -539,7 +591,6 @@ const searchel = document.querySelector('.datalistOpt');
         document.getElementById('submitbtn').click()
 
       })
-
 
 
 
@@ -647,111 +698,67 @@ const selectElement = document.querySelector('.mongoredirectstatuscon');
 
 
 
-      $("#golive").click(function(){
-        let intervalID;
-
-
-
-
-
-
-
-        function letgolive(){
-$.ajax({
-    url: "/liveupdates",
-    // headers: { "Content-type": "application/json; charset=UTF-8" },
-    method: "get",  
-    success: function(data){
-
-console.log(data)
-$(data).each(function(index,value){
-// $('').reset()
-// $('.tableo').empty()
-
-let date = new Date(value.createdAt)
-
-let livedata = "<h5 class='card-title'>Live visitors</h5><span style='border: 1px black solid;'> <hr /> <p>" + value._id + "</p><p>"
-     + value.email+ "</p><p>" + value.userip +
-         "</p><p>" + value.currentpage+ 
-            "</p><p>" + date + "</p></span>"
-
-
-$('.tableo').append(livedata);
-
-
-
-setTimeout(function(){
-$('.tableo').empty()
-}, 500)
-})}
-  });
-
-
-
-
-
-
-  $.ajax({
-    url: "/adminpage",
-    // headers: { "Content-type": "application/json; charset=UTF-8" },
-    method: "get"
-  })
-
-
-
-}
-
-  $(".liveview").toggle("slow", function(){
-
-
-
-            // check paragraph once toggle effect is completed
-            if($(".liveview").is(":visible")){
-
-                document.getElementById('golive').innerHTML = "Go Offline"
-                if (!intervalID) {
-                    let intervalID = setInterval(letgolive, 500)
-  }else if(intervalID){
-    clearInterval(intervalID)
-  }
-                // alert("The paragraph  is visible.");
-            } else{
-                document.getElementById('golive').innerHTML = "Go Live"
-                clearInterval(intervalID)
-                  // release our intervalID from the variable
-                  intervalID = null;
-                  console.log( intervalID)
-            }
    
 
 
-  });
-});
+// setInterval(function(){
 
-
-
-setInterval(function(){
-
-    $.ajax({
-    type: "POST",
-    // headers: { "Content-type": "application/json; charset=UTF-8" },
-    url: "/deletelivedata",
-   dataType: "json",
-   success: (response) => {
+//     $.ajax({
+//     type: "POST",
+//     // headers: { "Content-type": "application/json; charset=UTF-8" },
+//     url: "/deletelivedata",
+//    dataType: "json",
+//    success: (response) => {
     
 
+//     }
+
+
+//    }, 7000)
+
+// })
+
+
+
+
+$("#reloading-div").load("#reloading-div")
+
+
+
+document.getElementById('golive').innerHTML = "you are live!"
+
+}
+
+// function setdisplay(){
+//   document.getElementById('liveview').style.display = 'block'
+// }
+
+      $("#golive").click(function (){
+
+   
+        $(".liveview").toggle("slow", function () {
+        
+          if (!light) {
+         
+            // if display is visible
+        light = window.setInterval(disco,5000);
+        document.getElementById('golive').innerHTML = "Go offline"
+         
+       
+    } else {
+        // if display is not visible
+        
+        window.clearInterval(light);
+        light = null;
     }
 
 
-   }, 7000)
-
-})
 
 
 
 
-
-
+        });
+      });
 
 
 
@@ -767,50 +774,6 @@ setInterval(function(){
 <!-- <script type="module" src="dirty.js"></script>  -->
 
 <script src="../jade/config.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

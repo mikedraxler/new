@@ -40,12 +40,14 @@
           const url = window.location.hash;
           const yagent = navigator.userAgent;
           const date =  new Date();
-
+  
+          console.log(date)
         let data = {
           userip: userip,
           email: email,
           url: url,
-          useragent: yagent
+          useragent: yagent,
+          date : date
         }
 
        
@@ -74,7 +76,17 @@
 
 
 
+    //  function letgolive(){
+    //   $.ajax({
+    //       url: "/liveupdates",
+    //       // headers: { "Content-type": "application/json; charset=UTF-8" },
+    //       method: "get",  
+    //       success: function(data){}
 
+
+    //   })
+
+    // }
 
 
 
@@ -144,3 +156,10 @@ console.log(email  + ' data has been deleted succesfulluy')
 
 
     });
+
+
+
+    window.addEventListener("beforeunload", function(e){
+      alert('do this')
+   }, false);
+      

@@ -8,10 +8,13 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 
-const MongoDBURI = process.env.MONGO_URI;
+const MongoDBURI = process.env.MONGO_URI 
 
 
 // 'mongodb://localhost/ManualAuth'
+
+// const MongoDBURI = process.env.MONGO_URI || ''
+
 mongoose.connect(MongoDBURI, {
   useUnifiedTopology: true,
   useNewUrlParser: true
