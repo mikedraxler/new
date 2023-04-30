@@ -97,53 +97,52 @@
 
 
      
-setInterval(function(){
+// setInterval(function(){
 
-  let email = {email : localStorage.getItem("email")} 
+//   let email = {email : localStorage.getItem("email")} 
   
 
 
 
 
 
-  $.ajax({
-    type: "POST",
-    // headers: { "Content-type": "application/json; charset=UTF-8" },
-    url: "/deletelivedata",
-    data : email,
-   dataType: "json",
-   success: (response) => {
+//   $.ajax({
+//     type: "POST",
+//     url: "/deletelivedata",
+//     data : email,
+//    dataType: "json",
+//    success: (response) => {
     
-    if(response.Success == "deleted"){
+//     if(response.Success == "deleted"){
 
 
        
-console.log(email  + ' data has been deleted succesfulluy')
+// console.log(email  + ' data has been deleted succesfulluy')
 
 
 
 
 
-    }
+//     }
 
-  },
-  error: (error) => {
+//   },
+//   error: (error) => {
 
    
-  }
+//   }
 
 
 
 
 
-   })
+//    })
 
 
 
 
 
 
-        }, 5000);
+//         }, 5000);
 
 
 

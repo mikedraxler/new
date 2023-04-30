@@ -147,20 +147,23 @@ router.get('/adminpage', (req, res, next) => {
 	// res.render("./admin/admin.ejs", {
 	// 	data: docs
 	// });
-	User.find((err, docs) => {
+	liveUser.find((err, docs) => {
         if (err) {
 			// console.log('done')
       
         } else {
+			
 
-			liveUser.find((err, docsx) => {
+			User.findOne({ email: docs[0].email },(err, docsx) => {
 				if (err) {
-					// console.log('done')
+					console.log('error')
 			  
 				} else {
+					console.log(docsx)
+					console.log( "docsx above")
 
 						res.render("./admin/admin.ejs", {
-		data: docs, datax: docsx
+		data: docs, datax: docsx 
 	});
 				}
 		
